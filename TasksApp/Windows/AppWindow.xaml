@@ -1,0 +1,213 @@
+﻿<Window x:Class="TasksApp.AppWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TasksApp"
+        mc:Ignorable="d"
+        Title="TasksApp" MinHeight="650" MinWidth="610" 
+        Height="650" Width="610">
+
+    <Window.Resources>
+
+        <Style x:Key="SidebarBtn">
+            <Setter Property="Control.Background" Value="Transparent"/>
+            <Setter Property="Button.BorderBrush" Value="Transparent"/>
+            <Setter Property="Control.Cursor" Value="Hand"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle x:Name="SideBarRect" Grid.Column="0" Fill="#F5F5DB" Width="170" Visibility="Collapsed"/>
+        <Grid x:Name="SideBarGrid" Grid.Column="0" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!--Sidebar Menu-->
+            <StackPanel Grid.Row="0">
+                <Button x:Name="SidebarClose" Content="☰" Background="Transparent" BorderBrush="Transparent"  
+                        Margin="0 0 0 30" FontSize="20" Cursor="Hand"/>
+                <Button x:Name="ATasksBtn" Content="All Tasks" Style="{StaticResource SidebarBtn}"/>
+                <Button x:Name="DTasksBtn" Content="Daily Tasks" Style="{StaticResource SidebarBtn}"/>
+                <Button x:Name="MTasksBtn" Content="Monthly Tasks" Style="{StaticResource SidebarBtn}"/>
+            </StackPanel>
+
+            <Button x:Name="ProfileBtn" Grid.Row="1" Content="MyProfile" Style="{StaticResource SidebarBtn}"/>
+        </Grid>
+
+        <!--Main Grid-->
+        <Grid x:Name="MainGrid" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".15*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width=".15*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <StackPanel Grid.Column="0" x:Name="SidebarOpenPanel">
+                <Button Content ="☰" Background="Transparent" BorderThickness="0" 
+                        x:Name="SidebarOpen" Click="SideBar" FontSize="20" Cursor="Hand"/>
+            </StackPanel>
+
+            <!--All tasks-->
+            <Border Grid.Column="1" x:Name="ATasks" Visibility="Collapsed">
+                <StackPanel x:Name="ATasksPanel">
+
+                    <Label Content="All Tasks" HorizontalAlignment="Center" FontSize="20"/>
+
+                    <!--Add task button-->
+                    <TextBlock x:Name="AddTask" Text="+" HorizontalAlignment="Center" Cursor="Hand"
+                               FontSize="35">
+                        <TextBlock.ToolTip>
+                            <ToolTip Background="White" HasDropShadow="False"
+                                     Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
+                                <TextBlock Text="Add new task"/>
+                            </ToolTip>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+
+                    <!-- List of all tasks -->
+                    <ListBox Name="AllTasksList" BorderThickness="0" HorizontalContentAlignment="Stretch"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto" Height="480">
+
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="IsSelected" Value="{Binding Path = IsSelected, UpdateSourceTrigger=PropertyChanged}"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+
+                        <!-- Template of task -->
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="local:Task">
+
+                                <Border BorderThickness="1" BorderBrush="Black" Height="50">
+                                    <DockPanel LastChildFill="True" Background="#F5F5DB">
+                                        <TextBlock DockPanel.Dock="Left" Width="Auto" VerticalAlignment="Center"
+                                                   Text="{Binding Path=DeadLine, StringFormat=d MMM yyy}"
+                                                   Padding="10 0 0 0"/>
+                                        <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" 
+                                                   VerticalAlignment="Center"/>
+                                    </DockPanel>
+                                </Border>
+
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Mark as done button -->
+                        <Button x:Name="DoneBtn" Grid.Column="0" Content="Mark as done" Margin="10" 
+                                Background="#F5F5DB" Click="DoneBtn_OnClick" Cursor="Hand">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" HasDropShadow="False"
+                                         Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
+                                    <TextBlock Text="Select task in list and click 'Mark as done' button"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+
+                        <!-- Edit task button -->
+                        <Button x:Name="EditBtn" Grid.Column="2" Content="Edit task" Margin="10"
+                                Background="#F5F5DB" Click="EditBtn_OnClick" Cursor="Hand">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" HasDropShadow="False"
+                                         Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
+                                    <TextBlock Text="Select task in list and click 'Edit' button"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!--Daily Tasks-->
+            <Border Grid.Column="1" x:Name="DTasks" Visibility="Visible">
+                <StackPanel>
+                    <Label Content="Daily Tasks" HorizontalAlignment="Center" FontSize="20"/>
+                    <TextBlock Text="" 
+                               HorizontalAlignment="Center" FontSize="16"/>
+
+                    <ListBox x:Name="DailyTasksList" BorderThickness="0" HorizontalContentAlignment="Stretch"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto" Height="480">
+
+                        <!-- Daily tasks template -->
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="local:Task">
+
+                                <Border BorderThickness="1" BorderBrush="Black" Height="50">
+                                    <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"/>
+                                </Border>
+
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+
+            <!--Monthly tasks-->
+            <Border Grid.Column="1" x:Name="MTasks" Visibility="Collapsed">
+                <StackPanel>
+                    <Label Content="Monthly Tasks" HorizontalAlignment="Center" FontSize="20"/>
+                    <TextBlock Text="Coming soon..." HorizontalAlignment="Center" FontSize="16"/>
+                </StackPanel>
+            </Border>
+
+            <!--My Profile-->
+            <Border Grid.Column="1" x:Name="MyProfile" Visibility="Collapsed">
+                <StackPanel>
+                    <Label Content="My Profile" HorizontalAlignment="Center" FontSize="20"/>
+
+                    <!-- Name -->
+                    <DockPanel LastChildFill="True" Margin="0 170 60 0">
+                        <Label DockPanel.Dock="Left" Content="My name:" VerticalAlignment="Center" Width="150"
+                               VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="UsersName" Height="20"/>
+                    </DockPanel>
+
+                    <!-- BirthDay -->
+                    <DockPanel LastChildFill="True" Margin="0 10 60 0">
+                        <Label DockPanel.Dock="Left" Content="My birthday:" VerticalAlignment="Center" Width="150"/>
+                        <DatePicker x:Name="BirthDay" SelectedDateFormat="Short" IsDropDownOpen="False" Height="24"/>
+                    </DockPanel>
+
+                    <!-- Change Password -->
+                    <DockPanel LastChildFill="True" Margin="0 10 60 0">
+                        <Label DockPanel.Dock="Left" Content="Change password:" VerticalAlignment="Center" Width="150"/>
+                        <PasswordBox x:Name="Password1" Height="20"/>
+                    </DockPanel>
+
+                    <!-- Repeat Password -->
+                    <DockPanel LastChildFill="True" Margin="0 10 60 0">
+                        <Label DockPanel.Dock="Left" Content="Enter password again:" VerticalAlignment="Center" Width="150"/>
+                        <PasswordBox x:Name="Password2" Height="20"/>
+                    </DockPanel>
+
+                    <!-- Save and Exit buttons -->
+                    <StackPanel>
+                        <Button Content="Save changes" HorizontalAlignment="Right" Margin="0 20 60 0" Cursor="Hand"
+                                Background="#F5F5DB" Padding="10 0" x:Name="SaveChanges" Click="SaveChanges_OnClick"/>
+                        <Button Content="Exit" HorizontalAlignment="Right" Margin="0 10 60 0" Cursor="Hand"
+                                Background="#F5F5DB" Padding="36 0" x:Name="ExitAccount" Click="ExitAccount_OnClick"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+    </Grid>
+</Window>
