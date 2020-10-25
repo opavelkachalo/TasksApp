@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TasksApp"
         mc:Ignorable="d"
-        Title="TasksApp" MinHeight="650" MinWidth="610" 
-        Height="650" Width="610">
+        Title="TasksApp" MinHeight="650" MinWidth="650" 
+        Height="650" Width="650">
 
     <Window.Resources>
 
@@ -14,6 +14,14 @@
             <Setter Property="Control.Background" Value="Transparent"/>
             <Setter Property="Button.BorderBrush" Value="Transparent"/>
             <Setter Property="Control.Cursor" Value="Hand"/>
+        </Style>
+
+        <Style x:Key="DTaskDateSwitch">
+            <Setter Property="Control.Background" Value="Transparent"/>
+            <Setter Property="Button.BorderBrush" Value="Transparent"/>
+            <Setter Property="Control.Cursor" Value="Hand"/>
+            <Setter Property="Control.FontSize" Value="20"/>
+            <Setter Property="Control.FontWeight" Value="Bold"/>
         </Style>
 
     </Window.Resources>
@@ -58,7 +66,7 @@
             </StackPanel>
 
             <!--All tasks-->
-            <Border Grid.Column="1" x:Name="ATasks" Visibility="Collapsed">
+            <Border Grid.Column="1" x:Name="ATasks" Visibility="Visible">
                 <StackPanel x:Name="ATasksPanel">
 
                     <Label Content="All Tasks" HorizontalAlignment="Center" FontSize="20"/>
@@ -103,6 +111,7 @@
 
                     </ListBox>
 
+                    <!-- Buttons -->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -112,7 +121,7 @@
 
                         <!-- Mark as done button -->
                         <Button x:Name="DoneBtn" Grid.Column="0" Content="Mark as done" Margin="10" 
-                                Background="#F5F5DB" Click="DoneBtn_OnClick" Cursor="Hand">
+                                Background="#F5F5DB" Cursor="Hand" Click="DoneBtn_OnClick">
                             <Button.ToolTip>
                                 <ToolTip Background="White" HasDropShadow="False"
                                          Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
@@ -123,33 +132,56 @@
 
                         <!-- Edit task button -->
                         <Button x:Name="EditBtn" Grid.Column="2" Content="Edit task" Margin="10"
-                                Background="#F5F5DB" Click="EditBtn_OnClick" Cursor="Hand">
+                                Background="#F5F5DB" Cursor="Hand" Click="EditBtn_OnClick">
                             <Button.ToolTip>
                                 <ToolTip Background="White" HasDropShadow="False"
                                          Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
-                                    <TextBlock Text="Select task in list and click 'Edit' button"/>
+                                    <TextBlock Text="Select task in list and click 'Edit task' button"/>
                                 </ToolTip>
                             </Button.ToolTip>
                         </Button>
                     </Grid>
                 </StackPanel>
             </Border>
-
+            
             <!--Daily Tasks-->
-            <Border Grid.Column="1" x:Name="DTasks" Visibility="Visible">
+            <Border Grid.Column="1" x:Name="DTasks" Visibility="Collapsed">
                 <StackPanel>
                     <Label Content="Daily Tasks" HorizontalAlignment="Center" FontSize="20"/>
-                    <TextBlock Text="" 
-                               HorizontalAlignment="Center" FontSize="16"/>
+                    <DockPanel LastChildFill="True">
+                        <Button x:Name="Bwd" DockPanel.Dock="Left" Content="◀" 
+                                Style="{StaticResource DTaskDateSwitch}" Click="SwitchDate"/>
+                        <Button x:Name="Fwd" DockPanel.Dock="Right" Content="▶" 
+                                Style="{StaticResource DTaskDateSwitch}" Click="SwitchDate"/>
+                        <TextBlock x:Name="DateOfDTasks" HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" FontSize="16"/>
+                    </DockPanel>
+
+                    <!--Add task button-->
+                    <TextBlock x:Name="AddDaily" Text="+" HorizontalAlignment="Center" Cursor="Hand"
+                               FontSize="35">
+                        <TextBlock.ToolTip>
+                            <ToolTip Background="White" HasDropShadow="False"
+                                     Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
+                                <TextBlock Text="Add new task"/>
+                            </ToolTip>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
 
                     <ListBox x:Name="DailyTasksList" BorderThickness="0" HorizontalContentAlignment="Stretch"
-                             ScrollViewer.VerticalScrollBarVisibility="Auto" Height="480">
+                             ScrollViewer.VerticalScrollBarVisibility="Auto" Height="455">
+
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="IsSelected" Value="{Binding Path = IsSelected, UpdateSourceTrigger=PropertyChanged}"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
 
                         <!-- Daily tasks template -->
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="local:Task">
 
-                                <Border BorderThickness="1" BorderBrush="Black" Height="50">
+                                <Border BorderThickness="1" BorderBrush="Black" Background="#F5F5DB" Height="50">
                                     <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" 
                                                VerticalAlignment="Center"/>
                                 </Border>
@@ -157,6 +189,37 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+
+                    <!-- Buttons -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Mark as done button -->
+                        <Button x:Name="DoneDaily" Grid.Column="0" Content="Mark as done" Margin="10"
+                                Background="#F5F5DB" Cursor="Hand" Click="DoneBtn_OnClick">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" HasDropShadow="False"
+                                         Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
+                                    <TextBlock Text="Select task in list and click 'Mark as done' button"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+
+                        <!-- Edit task button -->
+                        <Button x:Name="EditDaily" Grid.Column="2" Content="Edit task" Margin="10"
+                                Background="#F5F5DB" Cursor="Hand" Click="EditBtn_OnClick">
+                            <Button.ToolTip>
+                                <ToolTip Background="White" HasDropShadow="False"
+                                         Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
+                                    <TextBlock Text="Select task in list and click 'Edit task' button"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                    </Grid>
                 </StackPanel>
             </Border>
 

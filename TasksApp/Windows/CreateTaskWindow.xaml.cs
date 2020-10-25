@@ -9,11 +9,13 @@ namespace TasksApp
     public partial class Window1 : Window
     {
 
-        public Window1()
+        public Window1(DateTime? someDate=null)
         {
             InitializeComponent();
             Create.Click += CreateTaskOnClick;
             DeadLine.DisplayDateStart = DateTime.Now;
+            if (someDate != null)
+                DeadLine.SelectedDate = someDate;
         }
 
         private void CreateTaskOnClick(object sender, RoutedEventArgs e)

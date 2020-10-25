@@ -21,12 +21,12 @@ namespace TasksApp
             Tasks = new ObservableCollection<Task>();
         }
 
-        public ObservableCollection<Task> DailyTasksCollection()
+        public ObservableCollection<Task> DailyTasksCollection(DateTime today)
         {
             ObservableCollection<Task> tasksCollection = new ObservableCollection<Task>();
             foreach (Task task in Tasks)
             {
-                if (task.DeadLine == DateTime.Now.Date)
+                if (task.DeadLine == today.Date)
                 {
                     tasksCollection.Add(task);
                 }

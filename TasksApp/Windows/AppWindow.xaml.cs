@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Newtonsoft.Json;
 
 namespace TasksApp
@@ -17,24 +19,33 @@ namespace TasksApp
     {
         public static string StringUser;
         public User ActiveUser;
+        public DateTime DTaskDay;
 
         public AppWindow()
         {
             InitializeComponent();
 
+            // initializing ActiveUser
             StringUser = File.ReadAllText(Directory.GetCurrentDirectory() + @"\..\..\active.json");
             ActiveUser = JsonConvert.DeserializeObject<User>(StringUser);
 
+            // Adding handlers for events
             SidebarClose.Click += SideBar;
             AddTask.MouseLeftButtonDown += AddNewTask;
+            AddDaily.MouseLeftButtonDown += AddNewTask;
             ATasksBtn.Click += OpenAllTasks;
             DTasksBtn.Click += OpenDailyTasks;
             MTasksBtn.Click += OpenMonthlyTasks;
             ProfileBtn.Click += OpenMyProfile;
 
+            // Initializing date for Daily Tasks date
+            DTaskDay = DateTime.Now.Date;
+
             // Binding ActiveUser.Tasks to AllTasksList ListBox
             AllTasksList.ItemsSource = ActiveUser.Tasks;
-            DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection();
+
+            // Binding all tasks of dTaskDay to DailyTasksList ListBox
+            DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
         }
 
         // Opening and closing sidebar
@@ -57,7 +68,7 @@ namespace TasksApp
         // Opens new dialog window, that crates new task
         private void AddNewTask(object sender, MouseButtonEventArgs e)
         {
-            Window1 createTaskWindow = new Window1();
+            Window1 createTaskWindow = (TextBlock)sender == AddTask ? new Window1() : new Window1(DTaskDay);
             if (createTaskWindow.ShowDialog() == true)
             {
                 Task newTask = new Task(createTaskWindow.NameOfTask, createTaskWindow.DeadlineOfTask);
@@ -66,8 +77,8 @@ namespace TasksApp
                 ActiveUser.Tasks.Add(newTask);
                 ActiveUser.Tasks = new ObservableCollection<Task>(ActiveUser.Tasks.OrderBy(t => t.DeadLine));
                 AllTasksList.ItemsSource = ActiveUser.Tasks;
-                DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection();
 
+                DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
                 SaveData();
             }
         }
@@ -103,7 +114,7 @@ namespace TasksApp
                     ActiveUser.Tasks.Remove(task);
                 }
             }
-            DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection();
+            DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
             SaveData();
         }
 
@@ -123,8 +134,7 @@ namespace TasksApp
                     }
                 }
             }
-            DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection();
-
+            DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
             SaveData();
         }
 
@@ -139,13 +149,35 @@ namespace TasksApp
         }
 
         // Opening panel with daily tasks
-        // TODO: make logic for daily tasks page
         private void OpenDailyTasks(object sender, RoutedEventArgs e)
         {
             foreach (UIElement border in MainGrid.Children)
             {
                 border.Visibility = border == DTasks ? Visibility.Visible : Visibility.Collapsed;
             }
+            DTaskDay = DateTime.Now.Date;
+            DateOfDTasks.Text = DTaskDay.ToString("D", new CultureInfo("en"));
+            DateOfDTasks.Foreground = new SolidColorBrush(Colors.Red);
+            DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
+        }
+
+        // Switching date on daily tasks page
+        private void SwitchDate(object sender, RoutedEventArgs e)
+        {
+            if ((Button) sender == Fwd)
+            {
+                DTaskDay = DTaskDay.AddDays(1);
+            }
+            else if ((Button) sender == Bwd)
+            {
+                DTaskDay = DTaskDay.AddDays(-1);
+            }
+
+            DateOfDTasks.Foreground = DTaskDay == DateTime.Now.Date ? 
+                new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Black);
+
+            DateOfDTasks.Text = DTaskDay.ToString("D", new CultureInfo("en"));
+            DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
         }
 
         // Opening panel with monthly tasks
@@ -203,3 +235,4 @@ namespace TasksApp
         }
     }
 }
+// TODO: Add history for done marks
