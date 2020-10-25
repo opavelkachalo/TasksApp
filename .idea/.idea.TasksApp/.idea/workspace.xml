@@ -22,55 +22,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db838a3f-0e27-4177-86d7-accd0698cbc5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TasksApp/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TasksApp/.idea/contentModel.xml" afterDir="false" />
+    <list default="true" id="db838a3f-0e27-4177-86d7-accd0698cbc5" name="Default Changelist" comment="files organization change">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TasksApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TasksApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/Windows/App.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/Windows/App.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/AppWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/AppWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/AppWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/AppWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/Task.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/Classes/Task.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/TasksApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/TasksApp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/Classes/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/active.json" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/active.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/bin/Debug/System.Text.Json.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/bin/Debug/System.Text.Json.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/bin/Debug/TasksApp.exe" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/bin/Debug/TasksApp.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/bin/Debug/TasksApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/bin/Debug/TasksApp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/App.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/AppWindow.baml" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/AppWindow.baml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/AppWindow.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/AppWindow.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/AppWindow.g.i.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/AppWindow.g.i.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/CreateTaskWindow.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/CreateTaskWindow.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/CreateTaskWindow.g.i.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/CreateTaskWindow.g.i.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/EditTaskWindow.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/EditTaskWindow.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/EditTaskWindow.g.i.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/EditTaskWindow.g.i.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/MainWindow.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/MainWindow.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/MainWindow.g.i.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/MainWindow.g.i.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.exe" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.g.resources" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.g.resources" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp_MarkupCompile.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp_MarkupCompile.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp_MarkupCompile.lref" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp_MarkupCompile.lref" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/.signature.p7s" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/Icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/LICENSE.TXT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/System.Text.Json.4.7.2.nupkg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/THIRD-PARTY-NOTICES.TXT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/lib/net461/System.Text.Json.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/lib/net461/System.Text.Json.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/lib/netcoreapp3.0/System.Text.Json.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/lib/netcoreapp3.0/System.Text.Json.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/lib/netstandard2.0/System.Text.Json.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/lib/netstandard2.0/System.Text.Json.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/useSharedDesignerContext.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/System.Text.Json.4.7.2/version.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +95,16 @@
       <workItem from="1603228322879" duration="1000000" />
       <workItem from="1603229697101" duration="1403000" />
       <workItem from="1603364044443" duration="1286000" />
+      <workItem from="1603366816229" duration="472000" />
     </task>
+    <task id="LOCAL-00001" summary="files organization change">
+      <created>1603366986303</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603366986303</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,9 +122,12 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="files organization change" />
+    <option name="LAST_COMMIT_MESSAGE" value="files organization change" />
   </component>
   <component name="WindowStateProjectService">
     <state x="321" y="117" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1602623719369">
@@ -265,5 +230,9 @@
       <screen x="0" y="41" width="1280" height="679" />
     </state>
     <state x="142" y="41" key="SettingsEditor/0.41.1280.679@0.41.1280.679" timestamp="1602623656971" />
+    <state x="233" y="114" key="Vcs.Push.Dialog.v2" timestamp="1603367042935">
+      <screen x="0" y="41" width="1280" height="679" />
+    </state>
+    <state x="233" y="114" key="Vcs.Push.Dialog.v2/0.41.1280.679@0.41.1280.679" timestamp="1603367042935" />
   </component>
 </project>

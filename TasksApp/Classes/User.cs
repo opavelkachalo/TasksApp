@@ -20,5 +20,19 @@ namespace TasksApp
             Password = password;
             Tasks = new ObservableCollection<Task>();
         }
+
+        public ObservableCollection<Task> DailyTasksCollection()
+        {
+            ObservableCollection<Task> tasksCollection = new ObservableCollection<Task>();
+            foreach (Task task in Tasks)
+            {
+                if (task.DeadLine == DateTime.Now.Date)
+                {
+                    tasksCollection.Add(task);
+                }
+            }
+
+            return tasksCollection;
+        }
     }
 }
