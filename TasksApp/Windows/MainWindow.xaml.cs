@@ -20,12 +20,20 @@ namespace TasksApp
             LogInBtn.Click += LogIn;
             RegisterBtn.Click += Register;
             RegisterNew.Click += Register;
+            Cancel.Click += CancelReg;
 
             string active = File.ReadAllText(Directory.GetCurrentDirectory() + @"\..\..\active.json");
             if (active != "")
             {
                 LogIn(JsonConvert.DeserializeObject<User>(active));
             }
+        }
+
+        private void CancelReg(object sender, RoutedEventArgs e)
+        {
+            MainWindow newWindow = new MainWindow { Left = Left, Top = Top };
+            newWindow.Show();
+            Close();
         }
 
         public void LogIn(object sender, RoutedEventArgs e)

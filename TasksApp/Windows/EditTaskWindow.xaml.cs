@@ -17,6 +17,7 @@ namespace TasksApp
             DeadLineOfTask = deadLineOfTask;
             TaskName.Text = NameOfTask;
             DeadLine.SelectedDate = DeadLineOfTask;
+            DeadLine.DisplayDateStart = DateTime.Now;
             Edit.Click += EditOnClick;
         }
 

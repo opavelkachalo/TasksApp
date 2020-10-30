@@ -48,6 +48,19 @@
             <Setter Property="Control.Cursor" Value="Hand"/>
         </Style>
 
+        <Style x:Key="CancelBtn">
+            <Setter Property="Control.Margin" Value="10 15 0 0"/>
+            <Setter Property="Control.Padding" Value="15 0"/>
+            <Setter Property="Control.HorizontalAlignment" Value="Right"/>
+            <Setter Property="Control.Height" Value="25"/>
+            <Setter Property="Control.Width" Value="Auto"/>
+            <Setter Property="Control.FontSize" Value="12"/>
+            <Setter Property="Control.Background" Value="Transparent"/>
+            <Setter Property="Button.BorderBrush" Value="Blue"/>
+            <Setter Property="Control.BorderThickness" Value=".5"/>
+            <Setter Property="Control.Cursor" Value="Hand"/>
+        </Style>
+
         <Style x:Key="RegisterBtn">            
             <Setter Property="Control.Margin" Value="20 15 20 0"/>
             <Setter Property="Control.HorizontalAlignment" Value="Center"/>
@@ -143,7 +156,11 @@
                     <Label Content="Enter password again*:" Style="{StaticResource AuthorizationLabel}"/>
                     <PasswordBox x:Name="RegPassword2" Style="{StaticResource AuthorizationTxtBox}"/>
 
-                    <Button x:Name="RegisterNew"  Content="Sign Up" Style="{StaticResource LoginBtn}"/>
+                    <DockPanel LastChildFill="False">
+                        <Button DockPanel.Dock="Right" x:Name="RegisterNew"  Content="Sign Up" Style="{StaticResource LoginBtn}"/>
+                        <Button DockPanel.Dock="Left" x:Name="Cancel"  Content="Cancel" Style="{StaticResource CancelBtn}"/>
+                    </DockPanel>
+                    
                     <Label Content="All * must be filled" FontSize="9" Foreground="Gray"/>
                 </StackPanel>
                 

@@ -22,14 +22,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db838a3f-0e27-4177-86d7-accd0698cbc5" name="Default Changelist" comment="files organization change II">
+    <list default="true" id="db838a3f-0e27-4177-86d7-accd0698cbc5" name="Default Changelist" comment="Add functional for daily tasks page">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TasksApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TasksApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/bin/Debug/TasksApp.exe" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/bin/Debug/TasksApp.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/bin/Debug/TasksApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/bin/Debug/TasksApp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.exe" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.g.resources" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.g.resources" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp_MarkupCompile.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TasksApp/obj/Debug/TasksApp_MarkupCompile.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +47,7 @@
         <option value="$PROJECT_DIR$/TasksApp/AppWindow.xaml" />
         <option value="$PROJECT_DIR$/TasksApp/Windows/App.xaml" />
         <option value="$PROJECT_DIR$/TasksApp/Windows/MainWindow.xaml.cs" />
+        <option value="$PROJECT_DIR$/TasksApp/Windows/AppWindow.xaml" />
       </list>
     </option>
   </component>
@@ -106,6 +101,7 @@
       <workItem from="1603366816229" duration="472000" />
       <workItem from="1603622427477" duration="1093000" />
       <workItem from="1603623778095" duration="74000" />
+      <workItem from="1603635828271" duration="328000" />
     </task>
     <task id="LOCAL-00001" summary="files organization change">
       <created>1603366986303</created>
@@ -135,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603622975355</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add functional for daily tasks page">
+      <created>1603636093401</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1603636093402</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,7 +162,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="files organization change" />
     <MESSAGE value="files organization change II" />
-    <option name="LAST_COMMIT_MESSAGE" value="files organization change II" />
+    <MESSAGE value="Add functional for daily tasks page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add functional for daily tasks page" />
   </component>
   <component name="WindowStateProjectService">
     <state x="321" y="117" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1602623719369">
@@ -174,22 +178,22 @@
       <screen x="0" y="41" width="1280" height="679" />
     </state>
     <state x="415" y="84" key="Github.UntrackedFilesDialog/0.41.1280.679@0.41.1280.679" timestamp="1603228625067" />
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1603365343185">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1603636160024">
       <screen x="0" y="41" width="1280" height="679" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.41.1280.679@0.41.1280.679" timestamp="1603365343185" />
-    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1603365343185">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.41.1280.679@0.41.1280.679" timestamp="1603636160024" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1603636160023">
       <screen x="0" y="41" width="1280" height="679" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.center/0.41.1280.679@0.41.1280.679" timestamp="1603365343185" />
-    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1603365343184">
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.41.1280.679@0.41.1280.679" timestamp="1603636160023" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1603636160022">
       <screen x="0" y="41" width="1280" height="679" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.left/0.41.1280.679@0.41.1280.679" timestamp="1603365343184" />
-    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1603365343185">
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.41.1280.679@0.41.1280.679" timestamp="1603636160022" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1603636160023">
       <screen x="0" y="41" width="1280" height="679" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.right/0.41.1280.679@0.41.1280.679" timestamp="1603365343185" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.41.1280.679@0.41.1280.679" timestamp="1603636160023" />
     <state width="1237" height="230" key="GridCell.Tab.1.bottom" timestamp="1603229609659">
       <screen x="0" y="41" width="1280" height="679" />
     </state>
@@ -262,9 +266,9 @@
       <screen x="0" y="41" width="1280" height="679" />
     </state>
     <state x="142" y="41" key="SettingsEditor/0.41.1280.679@0.41.1280.679" timestamp="1603623849551" />
-    <state x="233" y="114" key="Vcs.Push.Dialog.v2" timestamp="1603622980043">
+    <state x="233" y="114" key="Vcs.Push.Dialog.v2" timestamp="1603636101769">
       <screen x="0" y="41" width="1280" height="679" />
     </state>
-    <state x="233" y="114" key="Vcs.Push.Dialog.v2/0.41.1280.679@0.41.1280.679" timestamp="1603622980043" />
+    <state x="233" y="114" key="Vcs.Push.Dialog.v2/0.41.1280.679@0.41.1280.679" timestamp="1603636101769" />
   </component>
 </project>

@@ -20,6 +20,7 @@ namespace TasksApp
         public static string StringUser;
         public User ActiveUser;
         public DateTime DTaskDay;
+        public DateTime TasksMonth;
 
         public AppWindow()
         {
@@ -33,6 +34,7 @@ namespace TasksApp
             SidebarClose.Click += SideBar;
             AddTask.MouseLeftButtonDown += AddNewTask;
             AddDaily.MouseLeftButtonDown += AddNewTask;
+            AddMonthly.MouseLeftButtonDown += AddNewTask;
             ATasksBtn.Click += OpenAllTasks;
             DTasksBtn.Click += OpenDailyTasks;
             MTasksBtn.Click += OpenMonthlyTasks;
@@ -41,11 +43,17 @@ namespace TasksApp
             // Initializing date for Daily Tasks date
             DTaskDay = DateTime.Now.Date;
 
+            // Initializing date to observe month of Monthly Tasks
+            TasksMonth = DateTime.Now;
+
             // Binding ActiveUser.Tasks to AllTasksList ListBox
             AllTasksList.ItemsSource = ActiveUser.Tasks;
 
-            // Binding all tasks of dTaskDay to DailyTasksList ListBox
+            // Binding all tasks of dTaskDay date to DailyTasksList ListBox
             DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
+
+            // Binding all tasks of TaskMonth month to MonthlyTasksList ListBox
+            MonthlyTasksList.ItemsSource = ActiveUser.MonthlyTasksCollection(TasksMonth);
         }
 
         // Opening and closing sidebar
@@ -65,10 +73,21 @@ namespace TasksApp
             }
         }
 
-        // Opens new dialog window, that crates new task
+        // Opens new dialog window, that creates new task
         private void AddNewTask(object sender, MouseButtonEventArgs e)
         {
-            Window1 createTaskWindow = (TextBlock)sender == AddTask ? new Window1() : new Window1(DTaskDay);
+            Window1 createTaskWindow;
+
+            // initialization of dialog window for creating task
+            if ((TextBlock) sender == AddTask || (TextBlock) sender == AddMonthly)
+            {
+                createTaskWindow = new Window1();
+            }
+            else
+            {
+                createTaskWindow = new Window1(DTaskDay);
+            }
+
             if (createTaskWindow.ShowDialog() == true)
             {
                 Task newTask = new Task(createTaskWindow.NameOfTask, createTaskWindow.DeadlineOfTask);
@@ -76,9 +95,13 @@ namespace TasksApp
                 // adding newTask to ActiveUser.Tasks and sorting it by DeadLine
                 ActiveUser.Tasks.Add(newTask);
                 ActiveUser.Tasks = new ObservableCollection<Task>(ActiveUser.Tasks.OrderBy(t => t.DeadLine));
+                
+                // updating ListBoxes on all pages
                 AllTasksList.ItemsSource = ActiveUser.Tasks;
-
                 DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
+                MonthlyTasksList.ItemsSource = ActiveUser.MonthlyTasksCollection(TasksMonth);
+
+                // saving data
                 SaveData();
             }
         }
@@ -86,8 +109,10 @@ namespace TasksApp
         // Saving all changed data to active.json and users.json
         private void SaveData()
         {
+            // updating and saving active.json
             string activeUser = JsonConvert.SerializeObject(ActiveUser);
             File.WriteAllText(Directory.GetCurrentDirectory() + @"\..\..\active.json", activeUser);
+            // updating users.json
             List<User> listOfUsers = MainWindow.UsersList();
             foreach (User user in listOfUsers)
             {
@@ -99,6 +124,7 @@ namespace TasksApp
                     user.Password = ActiveUser.Password;
                 }
             }
+            // saving users.json
             string jsonUsers = JsonConvert.SerializeObject(listOfUsers);
             File.WriteAllText(Directory.GetCurrentDirectory() + @"\..\..\users.json", jsonUsers);
         }
@@ -115,6 +141,7 @@ namespace TasksApp
                 }
             }
             DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
+            MonthlyTasksList.ItemsSource = ActiveUser.MonthlyTasksCollection(TasksMonth);
             SaveData();
         }
 
@@ -135,6 +162,7 @@ namespace TasksApp
                 }
             }
             DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
+            MonthlyTasksList.ItemsSource = ActiveUser.MonthlyTasksCollection(TasksMonth);
             SaveData();
         }
 
@@ -164,6 +192,7 @@ namespace TasksApp
         // Switching date on daily tasks page
         private void SwitchDate(object sender, RoutedEventArgs e)
         {
+            // Cases for Daily Tasks page
             if ((Button) sender == Fwd)
             {
                 DTaskDay = DTaskDay.AddDays(1);
@@ -172,12 +201,34 @@ namespace TasksApp
             {
                 DTaskDay = DTaskDay.AddDays(-1);
             }
+            // Cases for Monthly Tasks page
+            else if ((Button) sender == FwdBtn)
+            {
+                TasksMonth = TasksMonth.AddMonths(1);
+            }
+            else if ((Button)sender == BwdBtn)
+            {
+                TasksMonth = TasksMonth.AddMonths(-1);
+            }
+            // Updating Label and ListBox for Daily Tasks page
+            if ((Button) sender == Fwd || (Button) sender == Bwd)
+            {
+                DateOfDTasks.Foreground = DTaskDay == DateTime.Now.Date
+                    ? new SolidColorBrush(Colors.Red)
+                    : new SolidColorBrush(Colors.Black);
 
-            DateOfDTasks.Foreground = DTaskDay == DateTime.Now.Date ? 
-                new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Black);
-
-            DateOfDTasks.Text = DTaskDay.ToString("D", new CultureInfo("en"));
-            DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
+                DateOfDTasks.Text = DTaskDay.ToString("D", new CultureInfo("en"));
+                DailyTasksList.ItemsSource = ActiveUser.DailyTasksCollection(DTaskDay);
+            }
+            // Updating Label and Listbox for Monthly Tasks page
+            else
+            {
+                MonthOfTasks.Foreground = TasksMonth.Month == DateTime.Now.Month
+                    ? new SolidColorBrush(Colors.Red)
+                    : new SolidColorBrush(Colors.Black);
+                MonthOfTasks.Text = TasksMonth.ToString("yyyy MMMM", new CultureInfo("en"));
+                MonthlyTasksList.ItemsSource = ActiveUser.MonthlyTasksCollection(TasksMonth);
+            }
         }
 
         // Opening panel with monthly tasks
@@ -187,6 +238,10 @@ namespace TasksApp
             {
                 border.Visibility = border == MTasks ? Visibility.Visible : Visibility.Collapsed;
             }
+            TasksMonth= DateTime.Now.Date;
+            MonthOfTasks.Text = DTaskDay.ToString("yyyy MMMM", new CultureInfo("en"));
+            MonthOfTasks.Foreground = new SolidColorBrush(Colors.Red);
+            MonthlyTasksList.ItemsSource = ActiveUser.MonthlyTasksCollection(TasksMonth);
         }
 
         // Opening panel with profile settings

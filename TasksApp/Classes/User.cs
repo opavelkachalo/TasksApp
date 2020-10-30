@@ -34,5 +34,19 @@ namespace TasksApp
 
             return tasksCollection;
         }
+
+        public ObservableCollection<Task> MonthlyTasksCollection(DateTime month)
+        {
+            ObservableCollection<Task> monthlyTasksCollection = new ObservableCollection<Task>();
+            foreach (Task task in Tasks)
+            {
+                if (task.DeadLine != null && task.DeadLine.Value.Month == month.Month)
+                {
+                    monthlyTasksCollection.Add(task);
+                }
+            }
+
+            return monthlyTasksCollection;
+        }
     }
 }
