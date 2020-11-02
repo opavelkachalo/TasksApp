@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+// TODO: add priority level to task
 namespace TasksApp
 {
     public class Task : INotifyPropertyChanged

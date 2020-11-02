@@ -4,6 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TasksApp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
         Title="TasksApp" MinHeight="650" MinWidth="610" 
         Height="650" Width="610">
@@ -14,64 +22,24 @@
 
         <Style TargetType="TextBlock" x:Key="HeaderStyle">
             <Setter Property="Control.FontWeight" Value="DemiBold"/>
-            <Setter Property="Control.FontSize" Value="16"/>
+            <Setter Property="Control.FontSize" Value="18"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="Auto"/>
             <Setter Property="Margin" Value="0 5 0 0"/>
         </Style>
 
-        <Style x:Key="AuthorizationLabel">
-            <Setter Property="Control.Margin" Value="10 0"/>
-            <Setter Property="Control.FontSize" Value="12"/>
-        </Style>
-
-        <Style x:Key="AuthorizationTxtBox">
-            <Setter Property="Control.Margin" Value="10 0"/>
-            <Setter Property="Control.FontSize" Value="12"/>
-            <Setter Property="Control.BorderBrush" Value="Blue"/>
-            <Setter Property="Control.BorderThickness" Value=".5"/>
-            <Setter Property="Control.Height" Value="25"/>
-            <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
-        </Style>
-
-        <Style x:Key="LoginBtn">
-            <Setter Property="Control.Margin" Value="0 15 10 0"/>
-            <Setter Property="Control.Padding" Value="15 0"/>
-            <Setter Property="Control.HorizontalAlignment" Value="Right"/>
-            <Setter Property="Control.Height" Value="25"/>
-            <Setter Property="Control.Width" Value="Auto"/>
-            <Setter Property="Control.FontSize" Value="12"/>
-            <Setter Property="Control.Background" Value="Transparent"/>
-            <Setter Property="Button.BorderBrush" Value="Blue"/>
-            <Setter Property="Control.BorderThickness" Value=".5"/>
-            <Setter Property="Control.Cursor" Value="Hand"/>
-        </Style>
-
-        <Style x:Key="CancelBtn">
-            <Setter Property="Control.Margin" Value="10 15 0 0"/>
-            <Setter Property="Control.Padding" Value="15 0"/>
-            <Setter Property="Control.HorizontalAlignment" Value="Right"/>
-            <Setter Property="Control.Height" Value="25"/>
-            <Setter Property="Control.Width" Value="Auto"/>
-            <Setter Property="Control.FontSize" Value="12"/>
-            <Setter Property="Control.Background" Value="Transparent"/>
-            <Setter Property="Button.BorderBrush" Value="Blue"/>
-            <Setter Property="Control.BorderThickness" Value=".5"/>
-            <Setter Property="Control.Cursor" Value="Hand"/>
-        </Style>
-
         <Style x:Key="RegisterBtn">            
             <Setter Property="Control.Margin" Value="20 15 20 0"/>
             <Setter Property="Control.HorizontalAlignment" Value="Center"/>
-            <Setter Property="Control.Foreground" Value="Navy"/>
+            <Setter Property="Control.Foreground" Value="Indigo"/>
             <Setter Property="Control.Background" Value="Transparent"/>
             <Setter Property="Button.BorderBrush" Value="Transparent"/>
             <Setter Property="Control.Cursor" Value="Hand"/>
         </Style>
 
         <Style x:Key="WarnLabel">
-            <Setter Property="Control.Margin" Value="10 0"/>
+            <Setter Property="Control.Margin" Value="10 10 10 0"/>
             <Setter Property="Control.Foreground" Value="Red"/>
             <Setter Property="Control.FontSize" Value="10"/>
         </Style>
@@ -80,7 +48,7 @@
     
     <!-- MAIN GRID -->
 
-    <Grid Background="#F5F5DB">
+    <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".25*"/>
@@ -96,8 +64,7 @@
 
         <!-- AUTHORIZATION PAGE -->
 
-        <Border x:Name="MainEntrance" Grid.Column="1" Grid.Row="1" BorderBrush="Blue" BorderThickness=".5"
-                Background="White" Visibility="Visible">
+        <Border x:Name="MainEntrance" Grid.Column="1" Grid.Row="1" Visibility="Visible">
 
             <Grid>
 
@@ -111,13 +78,17 @@
 
                     <TextBlock Text="Hello!" Style="{StaticResource HeaderStyle}"/>
                     
-                    <Label x:Name="LoginWarn" Style="{StaticResource WarnLabel}"/>
-                    <Label Content="Username:" Style="{StaticResource AuthorizationLabel}"/>
-                    <TextBox x:Name="LoginBox" Style="{StaticResource AuthorizationTxtBox}"/>
-                    <Label Content="Password:" Style="{StaticResource AuthorizationLabel}"/>
-                    <PasswordBox x:Name="PasswordBox" Style="{StaticResource  AuthorizationTxtBox}"/>
+                    <Label x:Name="LoginWarn"  Style="{StaticResource WarnLabel}"/>
 
-                    <Button x:Name="LogInBtn" Content="Log In" Style="{StaticResource LoginBtn}"/>
+                    <TextBox x:Name="LoginBox" Margin="0 0 0 10" materialDesign:HintAssist.Hint="Username:"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             VerticalAlignment="Center"/>
+                    <PasswordBox x:Name="PasswordBox" materialDesign:HintAssist.Hint="Password:"
+                                 materialDesign:HintAssist.Foreground="Indigo"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+
+                    <Button x:Name="LogInBtn" Content="Log In" Margin="0 30 0 0"
+                            Style="{StaticResource MaterialDesignRaisedButton}"/>
 
                     <Button x:Name="RegisterBtn" Content="New User? Sign Up" Style="{StaticResource RegisterBtn}"/>
 
@@ -129,8 +100,7 @@
 
         <!-- REGISTRATION PAGE -->
 
-        <Border x:Name="Registration" Grid.Column="1" Grid.Row="1" BorderBrush="Blue" BorderThickness=".5"
-                Background="White" Padding="0 20" Visibility="Collapsed">
+        <Border x:Name="Registration" Grid.Column="1" Grid.Row="1" Visibility="Collapsed">
 
             <Grid>
 
@@ -140,28 +110,33 @@
                     <ColumnDefinition Width=".25*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="1">
-                    <TextBlock Text="Registration"  Style="{StaticResource HeaderStyle}"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="Registration" Style="{StaticResource HeaderStyle}"/>
 
-                    <Label x:Name="RegWarn" Style="{StaticResource WarnLabel}"/>
+                    <Label x:Name="RegWarn" Style="{StaticResource WarnLabel}"
+                           Margin="0 0 0 10"/>
 
-                    <Label Content="Enter your name*:" Style="{StaticResource AuthorizationLabel}"/>
-                    <TextBox x:Name="RegName" Style="{StaticResource AuthorizationTxtBox}"/>
-                    <Label Content="Enter your birth date*:" Style="{StaticResource AuthorizationLabel}"/>
-                    <DatePicker x:Name="RegBirthdate" IsDropDownOpen="False" SelectedDateFormat="Short" Style="{StaticResource AuthorizationTxtBox}"/>
-                    <Label Content="Create a username*:" Style="{StaticResource AuthorizationLabel}"/>
-                    <TextBox x:Name="RegLogin" Style="{StaticResource AuthorizationTxtBox}"/>
-                    <Label Content="Create a password*:" Style="{StaticResource AuthorizationLabel}"/>
-                    <PasswordBox x:Name="RegPassword1" Style="{StaticResource AuthorizationTxtBox}"/>
-                    <Label Content="Enter password again*:" Style="{StaticResource AuthorizationLabel}"/>
-                    <PasswordBox x:Name="RegPassword2" Style="{StaticResource AuthorizationTxtBox}"/>
+                    <TextBox x:Name="RegName" materialDesign:TransitionAssist.DisableTransitions="True"
+                             materialDesign:HintAssist.Hint="Enter your name:"/>
+                    <DatePicker x:Name="RegBirthdate" IsDropDownOpen="False" SelectedDateFormat="Short" 
+                                materialDesign:HintAssist.Hint="Enter your birth date:"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    <TextBox x:Name="RegLogin" materialDesign:TransitionAssist.DisableTransitions="True"
+                             Margin="0 15 0 0"
+                             materialDesign:HintAssist.Hint="Create a username:"/>
+                    <PasswordBox x:Name="RegPassword1" materialDesign:HintAssist.Hint="Create a password:"
+                                 Margin="0 15 0 0"/>
+                    <PasswordBox x:Name="RegPassword2" materialDesign:HintAssist.Hint="Enter password again:"
+                                 Margin="0 15 0 0"/>
 
-                    <DockPanel LastChildFill="False">
-                        <Button DockPanel.Dock="Right" x:Name="RegisterNew"  Content="Sign Up" Style="{StaticResource LoginBtn}"/>
-                        <Button DockPanel.Dock="Left" x:Name="Cancel"  Content="Cancel" Style="{StaticResource CancelBtn}"/>
+                    <DockPanel LastChildFill="False" Margin="0 20 0 10">
+                        <Button DockPanel.Dock="Right" x:Name="RegisterNew"  Content="Sign Up" 
+                                Style="{StaticResource MaterialDesignRaisedButton}"/>
+                        <Button DockPanel.Dock="Left" x:Name="Cancel"  Content="Cancel" 
+                                Style="{StaticResource MaterialDesignRaisedButton}"/>
                     </DockPanel>
                     
-                    <Label Content="All * must be filled" FontSize="9" Foreground="Gray"/>
+                    <Label Content="All fields must be filled" FontSize="9" Foreground="Gray"/>
                 </StackPanel>
                 
 

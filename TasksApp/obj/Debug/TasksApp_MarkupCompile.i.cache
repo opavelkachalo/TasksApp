@@ -9,12 +9,12 @@ TasksApp
 none
 false
 DEBUG;TRACE
-C:\Users\7\RiderProjects\TasksApp\TasksApp\Windows\App.xaml
-4203513223
+C:\Users\7\RiderProjects\TasksApp\TasksApp\App.xaml
+4947297717
 
-11-827099135
-23-506853232
-Windows\AppWindow.xaml;Windows\CreateTaskWindow.xaml;Windows\EditTaskWindow.xaml;Windows\MainWindow.xaml;
+11-1848218395
+25-1573922138
+AppWindow.xaml;CreateTaskWindow.xaml;EditTaskWindow.xaml;MainWindow.xaml;
 
-True
+False
 

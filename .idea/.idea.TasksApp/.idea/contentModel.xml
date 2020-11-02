@@ -15,13 +15,11 @@
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="Windows" t="Include">
-              <e p="App.g.cs" t="Include" />
-              <e p="AppWindow.g.cs" t="Include" />
-              <e p="CreateTaskWindow.g.cs" t="Include" />
-              <e p="EditTaskWindow.g.cs" t="Include" />
-              <e p="MainWindow.g.cs" t="Include" />
-            </e>
+            <e p="App.g.cs" t="Include" />
+            <e p="AppWindow.g.cs" t="Include" />
+            <e p="CreateTaskWindow.g.cs" t="Include" />
+            <e p="EditTaskWindow.g.cs" t="Include" />
+            <e p="MainWindow.g.cs" t="Include" />
           </e>
         </e>
         <e p="packages.config" t="Include" />

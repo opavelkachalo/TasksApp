@@ -21,6 +21,7 @@ namespace TasksApp
         public User ActiveUser;
         public DateTime DTaskDay;
         public DateTime TasksMonth;
+        public bool SideBarIsOpen;
 
         public AppWindow()
         {
@@ -61,16 +62,30 @@ namespace TasksApp
         {
             if ((Button) sender == SidebarClose)
             {
-                SideBarRect.Visibility = Visibility.Collapsed;
-                SideBarGrid.Visibility = Visibility.Collapsed;
-                SidebarOpenPanel.Visibility = Visibility.Visible;
+                CloseSideBar();
             }
             else if ((Button) sender == SidebarOpen)
             {
-                SideBarRect.Visibility = Visibility.Visible;
-                SideBarGrid.Visibility = Visibility.Visible;
-                SidebarOpenPanel.Visibility = Visibility.Collapsed;
+                OpenSideBar();
             }
+        }
+
+        private void OpenSideBar()
+        {
+            SideBarIsOpen = true;
+            SideBarRect.Visibility = Visibility.Visible;
+            SideBarGrid.Visibility = Visibility.Visible;
+            SidebarOpenPanel.Visibility = Visibility.Collapsed;
+            BackgroundRectangle.Visibility = Visibility.Visible;
+        }
+
+        private void CloseSideBar()
+        {
+            SideBarIsOpen = false;
+            SideBarRect.Visibility = Visibility.Collapsed;
+            SideBarGrid.Visibility = Visibility.Collapsed;
+            SidebarOpenPanel.Visibility = Visibility.Visible;
+            BackgroundRectangle.Visibility = Visibility.Collapsed;
         }
 
         // Opens new dialog window, that creates new task
@@ -166,7 +181,6 @@ namespace TasksApp
             SaveData();
         }
 
-        // TODO: add logic with timing of deadlines of tasks
         // Opening panel with all tasks
         private void OpenAllTasks(object sender, RoutedEventArgs e)
         {
@@ -174,6 +188,8 @@ namespace TasksApp
             {
                 border.Visibility = border == ATasks ? Visibility.Visible : Visibility.Collapsed;
             }
+
+            CloseSideBar();
         }
 
         // Opening panel with daily tasks
@@ -183,6 +199,9 @@ namespace TasksApp
             {
                 border.Visibility = border == DTasks ? Visibility.Visible : Visibility.Collapsed;
             }
+
+            CloseSideBar();
+
             DTaskDay = DateTime.Now.Date;
             DateOfDTasks.Text = DTaskDay.ToString("D", new CultureInfo("en"));
             DateOfDTasks.Foreground = new SolidColorBrush(Colors.Red);
@@ -238,7 +257,10 @@ namespace TasksApp
             {
                 border.Visibility = border == MTasks ? Visibility.Visible : Visibility.Collapsed;
             }
-            TasksMonth= DateTime.Now.Date;
+
+            CloseSideBar();
+
+            TasksMonth = DateTime.Now.Date;
             MonthOfTasks.Text = DTaskDay.ToString("yyyy MMMM", new CultureInfo("en"));
             MonthOfTasks.Foreground = new SolidColorBrush(Colors.Red);
             MonthlyTasksList.ItemsSource = ActiveUser.MonthlyTasksCollection(TasksMonth);
@@ -251,6 +273,8 @@ namespace TasksApp
             {
                 border.Visibility = border == MyProfile ? Visibility.Visible : Visibility.Collapsed;
             }
+
+            CloseSideBar();
 
             UsersName.Text = ActiveUser.Name;
             BirthDay.SelectedDate = ActiveUser.BirthDate;
@@ -288,6 +312,16 @@ namespace TasksApp
             mainWindow.Show();
             Close();
         }
+
+        private void Background_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (SideBarIsOpen)
+                CloseSideBar();
+        }
     }
 }
 // TODO: Add history for done marks
+// TODO: Add logic with timing of deadlines of tasks
+// TODO: Add animations to sidebar
+// TODO: Add icon to app
+// TODO: Make an .exe file

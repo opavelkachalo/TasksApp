@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TasksApp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="TasksApp" MinHeight="650" MinWidth="650" 
         Height="650" Width="650">
@@ -32,7 +33,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Rectangle x:Name="SideBarRect" Grid.Column="0" Fill="#F5F5DB" Width="170" Visibility="Collapsed"/>
+        <Rectangle x:Name="SideBarRect" Grid.Column="0" Width="170" Visibility="Collapsed"/>
         <Grid x:Name="SideBarGrid" Grid.Column="0" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -41,14 +42,16 @@
 
             <!--Sidebar Menu-->
             <StackPanel Grid.Row="0">
-                <Button x:Name="SidebarClose" Content="☰" Background="Transparent" BorderBrush="Transparent"  
+                <Button x:Name="SidebarClose" Content="☰" Foreground="Black" Background="Transparent" 
+                        BorderBrush="Transparent"  
                         Margin="0 0 0 30" FontSize="20" Cursor="Hand"/>
                 <Button x:Name="ATasksBtn" Content="All Tasks" Style="{StaticResource SidebarBtn}"/>
                 <Button x:Name="DTasksBtn" Content="Daily Tasks" Style="{StaticResource SidebarBtn}"/>
                 <Button x:Name="MTasksBtn" Content="Monthly Tasks" Style="{StaticResource SidebarBtn}"/>
             </StackPanel>
 
-            <Button x:Name="ProfileBtn" Grid.Row="1" Content="MyProfile" Style="{StaticResource SidebarBtn}"/>
+            <Button x:Name="ProfileBtn" Grid.Row="1" Margin="0 0 0 20
+                    " Content="MyProfile" Style="{StaticResource SidebarBtn}"/>
         </Grid>
 
         <!--Main Grid-->
@@ -59,11 +62,18 @@
                 <ColumnDefinition Width=".15*"/>
             </Grid.ColumnDefinitions>
 
-
             <StackPanel Grid.Column="0" x:Name="SidebarOpenPanel">
-                <Button Content ="☰" Background="Transparent" BorderThickness="0" 
+                <Button Content ="☰" Background="Transparent" Foreground="Black" BorderThickness="0"
                         x:Name="SidebarOpen" Click="SideBar" FontSize="20" Cursor="Hand"/>
             </StackPanel>
+
+            <!-- Background Rectangle -->
+            <Rectangle x:Name="BackgroundRectangle" Grid.Column="0" Grid.ColumnSpan="3" Opacity="0.7"
+                        Panel.ZIndex="100" Visibility="Collapsed" Cursor="Hand" MouseLeftButtonDown="Background_OnMouseLeftButtonDown">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="Black"/>
+                </Rectangle.Fill>
+            </Rectangle>
 
             <!-- ALL TASKS -->
             <Border Grid.Column="1" x:Name="ATasks" Visibility="Visible">
@@ -75,7 +85,7 @@
                     <TextBlock x:Name="AddTask" Text="+" HorizontalAlignment="Center" Cursor="Hand"
                                FontSize="35">
                         <TextBlock.ToolTip>
-                            <ToolTip Background="White" HasDropShadow="False"
+                            <ToolTip Background="Black" Foreground="White" HasDropShadow="False" Opacity="0.7"
                                      Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
                                 <TextBlock Text="Add new task"/>
                             </ToolTip>
@@ -96,15 +106,15 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="local:Task">
 
-                                <Border BorderThickness="1" BorderBrush="Black" Height="50">
-                                    <DockPanel LastChildFill="True" Background="#F5F5DB">
+                                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" Height="50">
+                                    <DockPanel LastChildFill="True">
                                         <TextBlock DockPanel.Dock="Left" Width="Auto" VerticalAlignment="Center"
                                                    Text="{Binding Path=DeadLine, StringFormat=d MMM yyy}"
                                                    Padding="10 0 0 0"/>
                                         <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" 
                                                    VerticalAlignment="Center"/>
                                     </DockPanel>
-                                </Border>
+                                </materialDesign:Card>
 
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -120,10 +130,10 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Mark as done button -->
-                        <Button x:Name="DoneBtn" Grid.Column="0" Content="Mark as done" Margin="10" 
-                                Background="#F5F5DB" Cursor="Hand" Click="DoneBtn_OnClick">
+                        <Button x:Name="DoneBtn" Grid.Column="0" Content="Mark as done" Margin="0 0 0 10" 
+                                Cursor="Hand" Click="DoneBtn_OnClick">
                             <Button.ToolTip>
-                                <ToolTip Background="White" HasDropShadow="False"
+                                <ToolTip Background="Black" Foreground="White" HasDropShadow="False" Opacity="0.7"
                                          Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
                                     <TextBlock Text="Select task in list and click 'Mark as done' button"/>
                                 </ToolTip>
@@ -131,10 +141,10 @@
                         </Button>
 
                         <!-- Edit task button -->
-                        <Button x:Name="EditBtn" Grid.Column="2" Content="Edit task" Margin="10"
-                                Background="#F5F5DB" Cursor="Hand" Click="EditBtn_OnClick">
+                        <Button x:Name="EditBtn" Grid.Column="2" Content="Edit task" Margin="0 0 0 10"
+                                Cursor="Hand" Click="EditBtn_OnClick">
                             <Button.ToolTip>
-                                <ToolTip Background="White" HasDropShadow="False"
+                                <ToolTip Background="Black" Foreground="White" HasDropShadow="False" Opacity="0.7"
                                          Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
                                     <TextBlock Text="Select task in list and click 'Edit task' button"/>
                                 </ToolTip>
@@ -149,10 +159,14 @@
                 <StackPanel>
                     <Label Content="Daily Tasks" HorizontalAlignment="Center" FontSize="20"/>
                     <DockPanel LastChildFill="True">
-                        <Button x:Name="Bwd" DockPanel.Dock="Left" Content="◀" 
-                                Style="{StaticResource DTaskDateSwitch}" Click="SwitchDate"/>
-                        <Button x:Name="Fwd" DockPanel.Dock="Right" Content="▶" 
-                                Style="{StaticResource DTaskDateSwitch}" Click="SwitchDate"/>
+                        <Button x:Name="Bwd" DockPanel.Dock="Left"
+                                Style="{StaticResource DTaskDateSwitch}" Click="SwitchDate">
+                            <materialDesign:PackIcon Kind="ArrowLeft"/>
+                        </Button>
+                        <Button x:Name="Fwd" DockPanel.Dock="Right"
+                                Style="{StaticResource DTaskDateSwitch}" Click="SwitchDate">
+                            <materialDesign:PackIcon Kind="ArrowRight"/>
+                        </Button>
                         <TextBlock x:Name="DateOfDTasks" HorizontalAlignment="Center"
                                    VerticalAlignment="Center" FontSize="16"/>
                     </DockPanel>
@@ -161,7 +175,7 @@
                     <TextBlock x:Name="AddDaily" Text="+" HorizontalAlignment="Center" Cursor="Hand"
                                FontSize="35">
                         <TextBlock.ToolTip>
-                            <ToolTip Background="White" HasDropShadow="False"
+                            <ToolTip Background="Black" Foreground="White" HasDropShadow="False" Opacity="0.7"
                                      Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
                                 <TextBlock Text="Add new task"/>
                             </ToolTip>
@@ -181,10 +195,10 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="local:Task">
 
-                                <Border BorderThickness="1" BorderBrush="Black" Background="#F5F5DB" Height="50">
+                                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" Height="50">
                                     <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" 
                                                VerticalAlignment="Center"/>
-                                </Border>
+                                </materialDesign:Card>
 
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -199,10 +213,10 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Mark as done button -->
-                        <Button x:Name="DoneDaily" Grid.Column="0" Content="Mark as done" Margin="10"
-                                Background="#F5F5DB" Cursor="Hand" Click="DoneBtn_OnClick">
+                        <Button x:Name="DoneDaily" Grid.Column="0" Content="Mark as done" Margin="0 0 0 10"
+                                Cursor="Hand" Click="DoneBtn_OnClick">
                             <Button.ToolTip>
-                                <ToolTip Background="White" HasDropShadow="False"
+                                <ToolTip Background="Black" Foreground="White" HasDropShadow="False" Opacity="0.7"
                                          Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
                                     <TextBlock Text="Select task in list and click 'Mark as done' button"/>
                                 </ToolTip>
@@ -210,10 +224,10 @@
                         </Button>
 
                         <!-- Edit task button -->
-                        <Button x:Name="EditDaily" Grid.Column="2" Content="Edit task" Margin="10"
-                                Background="#F5F5DB" Cursor="Hand" Click="EditBtn_OnClick">
+                        <Button x:Name="EditDaily" Grid.Column="2" Content="Edit task" Margin="0 0 0 10"
+                                Cursor="Hand" Click="EditBtn_OnClick">
                             <Button.ToolTip>
-                                <ToolTip Background="White" HasDropShadow="False"
+                                <ToolTip Background="Black" Foreground="White" HasDropShadow="False" Opacity="0.7"
                                          Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
                                     <TextBlock Text="Select task in list and click 'Edit task' button"/>
                                 </ToolTip>
@@ -228,11 +242,15 @@
                 <StackPanel>
                     <Label Content="Monthly Tasks" HorizontalAlignment="Center" FontSize="20"/>
                     <DockPanel LastChildFill="True">
-                        <Button x:Name="BwdBtn" DockPanel.Dock="Left" Content="◀" 
-                                Style="{StaticResource DTaskDateSwitch}" Click="SwitchDate"/>
-                        <Button x:Name="FwdBtn" DockPanel.Dock="Right" Content="▶" 
-                                Style="{StaticResource DTaskDateSwitch}" Click="SwitchDate"/>
-                        <TextBlock x:Name="MonthOfTasks" HorizontalAlignment="Center"
+                        <Button x:Name="BwdBtn" DockPanel.Dock="Left"
+                                Style="{StaticResource DTaskDateSwitch}" Click="SwitchDate">
+                            <materialDesign:PackIcon Kind="ArrowLeft"/>
+                        </Button>
+                        <Button x:Name="FwdBtn" DockPanel.Dock="Right"
+                                Style="{StaticResource DTaskDateSwitch}" Click="SwitchDate">
+                            <materialDesign:PackIcon Kind="ArrowRight" />
+                        </Button>
+                            <TextBlock x:Name="MonthOfTasks" HorizontalAlignment="Center"
                                    VerticalAlignment="Center" FontSize="16"/>
                     </DockPanel>
 
@@ -240,7 +258,7 @@
                     <TextBlock x:Name="AddMonthly" Text="+" HorizontalAlignment="Center" Cursor="Hand"
                                FontSize="35">
                         <TextBlock.ToolTip>
-                            <ToolTip Background="White" HasDropShadow="False"
+                            <ToolTip Background="Black" Foreground="White" HasDropShadow="False" Opacity="0.7"
                                      Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
                                 <TextBlock Text="Add new task"/>
                             </ToolTip>
@@ -260,10 +278,10 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="local:Task">
 
-                                <Border BorderThickness="1" BorderBrush="Black" Background="#F5F5DB" Height="50">
+                                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" Height="50">
                                     <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" 
                                                VerticalAlignment="Center"/>
-                                </Border>
+                                </materialDesign:Card>
 
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -278,10 +296,10 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Mark as done button -->
-                        <Button x:Name="DoneMonthly" Grid.Column="0" Content="Mark as done" Margin="10"
-                                Background="#F5F5DB" Cursor="Hand" Click="DoneBtn_OnClick">
+                        <Button x:Name="DoneMonthly" Grid.Column="0" Content="Mark as done" Margin="0 0 0 10"
+                                Cursor="Hand" Click="DoneBtn_OnClick">
                             <Button.ToolTip>
-                                <ToolTip Background="White" HasDropShadow="False"
+                                <ToolTip Background="Black" Foreground="White" HasDropShadow="False" Opacity="0.7"
                                          Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
                                     <TextBlock Text="Select task in list and click 'Mark as done' button"/>
                                 </ToolTip>
@@ -289,10 +307,10 @@
                         </Button>
 
                         <!-- Edit task button -->
-                        <Button x:Name="EditMonthly" Grid.Column="2" Content="Edit task" Margin="10"
-                                Background="#F5F5DB" Cursor="Hand" Click="EditBtn_OnClick">
+                        <Button x:Name="EditMonthly" Grid.Column="2" Content="Edit task" Margin="0 0 0 10"
+                                Cursor="Hand" Click="EditBtn_OnClick">
                             <Button.ToolTip>
-                                <ToolTip Background="White" HasDropShadow="False"
+                                <ToolTip Background="Black" Foreground="White" HasDropShadow="False" Opacity="0.7"
                                          Placement="Relative" HorizontalOffset="15" VerticalOffset="10">
                                     <TextBlock Text="Select task in list and click 'Edit task' button"/>
                                 </ToolTip>
@@ -311,36 +329,33 @@
                     <DockPanel LastChildFill="True" Margin="0 170 60 0">
                         <Label DockPanel.Dock="Left" Content="My name:" VerticalAlignment="Center" Width="150"
                                VerticalContentAlignment="Center"/>
-                        <TextBox x:Name="UsersName" Height="20" BorderBrush="Blue" BorderThickness=".5"/>
+                        <TextBox x:Name="UsersName" Height="24"/>
                     </DockPanel>
 
                     <!-- BirthDay -->
                     <DockPanel LastChildFill="True" Margin="0 10 60 0">
                         <Label DockPanel.Dock="Left" Content="My birthday:" VerticalAlignment="Center" Width="150"/>
-                        <DatePicker x:Name="BirthDay" SelectedDateFormat="Short" IsDropDownOpen="False" Height="24"
-                                    BorderBrush="Blue" BorderThickness=".5"/>
+                        <DatePicker x:Name="BirthDay" SelectedDateFormat="Short" IsDropDownOpen="False" Height="24"/>
                     </DockPanel>
 
                     <!-- Change Password -->
                     <DockPanel LastChildFill="True" Margin="0 10 60 0">
                         <Label DockPanel.Dock="Left" Content="Change password:" VerticalAlignment="Center" Width="150"/>
-                        <PasswordBox x:Name="Password1" Height="20" BorderBrush="Blue" BorderThickness=".5"/>
+                        <PasswordBox x:Name="Password1" Height="24"/>
                     </DockPanel>
 
                     <!-- Repeat Password -->
                     <DockPanel LastChildFill="True" Margin="0 10 60 0">
                         <Label DockPanel.Dock="Left" Content="Enter password again:" VerticalAlignment="Center" Width="150"/>
-                        <PasswordBox x:Name="Password2" Height="20" BorderBrush="Blue" BorderThickness=".5"/>
+                        <PasswordBox x:Name="Password2" Height="24"/>
                     </DockPanel>
 
                     <!-- Save and Exit buttons -->
                     <StackPanel>
                         <Button Content="Save changes" HorizontalAlignment="Right" Margin="0 20 60 0" Cursor="Hand"
-                                Background="#F5F5DB" Padding="10 0" x:Name="SaveChanges" Click="SaveChanges_OnClick" 
-                                BorderBrush="Blue" BorderThickness=".5"/>
+                                Padding="10 0" x:Name="SaveChanges" Click="SaveChanges_OnClick" Width="120"/>
                         <Button Content="Exit" HorizontalAlignment="Right" Margin="0 10 60 0" Cursor="Hand"
-                                Background="#F5F5DB" Padding="36 0" x:Name="ExitAccount" Click="ExitAccount_OnClick" 
-                                BorderBrush="Blue" BorderThickness=".5"/>
+                                Padding="36 0" x:Name="ExitAccount" Click="ExitAccount_OnClick" Width="120"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
